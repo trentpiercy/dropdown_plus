@@ -66,6 +66,8 @@ class DropdownFormField<T> extends StatefulWidget {
   /// Style the search box text
   final TextStyle? searchTextStyle;
 
+  final Color? cursorColor;
+
   /// Message to disloay if the search dows not match with any item, Default : "No matching found!"
   final String emptyText;
 
@@ -90,6 +92,7 @@ class DropdownFormField<T> extends StatefulWidget {
     this.onSaved,
     this.dropdownHeight,
     this.searchTextStyle,
+    this.cursorColor,
     this.emptyText = "No matching found!",
     this.emptyActionText = 'Create new',
     this.onEmptyActionPressed,
@@ -198,9 +201,11 @@ class DropdownFormFieldState<T> extends State<DropdownFormField>
                 isFocused: _isFocused,
                 child: this._overlayEntry != null
                     ? EditableText(
-                        style: TextStyle(fontSize: 16, color: Colors.black87),
+                        style: (widget.searchTextStyle ??
+                            Theme.of(context).textTheme.subtitle1)!,
                         controller: _searchTextController,
-                        cursorColor: Colors.black87,
+                        cursorColor: (widget.cursorColor ??
+                            Theme.of(context).primaryColor),
                         focusNode: _searchFocusNode,
                         backgroundCursorColor: Colors.transparent,
                         onChanged: (str) {
@@ -281,10 +286,7 @@ class DropdownFormFieldState<T> extends State<DropdownFormField>
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
-                                      Text(
-                                        widget.emptyText,
-                                        style: TextStyle(color: Colors.black45),
-                                      ),
+                                      Text(widget.emptyText),
                                       if (widget.onEmptyActionPressed != null)
                                         TextButton(
                                           onPressed: () async {
