@@ -270,6 +270,7 @@ class DropdownFormFieldState<T> extends State<DropdownFormField<T>>
                                     T item = _options![position];
                                     Function() onTap = () {
                                       _listItemFocusedPosition = position;
+                                      _widgetFocusNode.unfocus();
                                       // _searchTextController.value =
                                       //     TextEditingValue(text: "");
                                       _removeOverlay();
