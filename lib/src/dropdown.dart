@@ -334,7 +334,7 @@ class DropdownFormFieldState<T> extends State<DropdownFormField<T>>
 
   _addOverlay() {
     if (_overlayEntry == null) {
-      _search("");
+      _search(_lastText);
       _overlayBackdropEntry = _createBackdropOverlay();
       _overlayEntry = _createOverlayEntry();
       _searchTextController.text = _lastText;
